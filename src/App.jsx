@@ -1,3 +1,5 @@
+import { ThirdwebSDK } from "@3rdweb/sdk";
+
 import { useEffect, useMemo, useState } from "react";
 
 // import thirdweb
