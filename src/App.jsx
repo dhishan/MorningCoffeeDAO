@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
-
 import { useWeb3 } from "@3rdweb/hooks";
 import { ThirdwebSDK } from "@3rdweb/sdk";
 import { ethers } from "ethers";
+import { UnsupportedChainIdError } from "@web3-react/core";
+
 
 
 const sdk = new ThirdwebSDK("rinkeby");
@@ -172,6 +173,18 @@ const App = () => {
       });
   }, [address]);
 
+  if (error instanceof UnsupportedChainIdError ) {
+  return (
+    <div className="unsupported-network">
+      <h2>Please connect to Rinkeby</h2>
+      <p>
+        This dapp only works on the Rinkeby network, please switch networks
+        in your connected wallet.
+      </p>
+    </div>
+  );
+}
+
   if (!address) {
     return (
       <div className="landing">
@@ -188,7 +201,8 @@ const App = () => {
   if (hasClaimedNFT) {
     return (
       <div className="member-page">
-        <h1>🍪DAO Member Page</h1>
+        <h1>DAO Member Page</h1>
+        <h2>A DAO to simplify your morning coffee confusions</h2>
         <p>Congratulations on being a member</p>
         <div>
           <div>
